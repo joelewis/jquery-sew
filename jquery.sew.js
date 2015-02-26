@@ -16,7 +16,8 @@
 			elementFactory: elementFactory,
 			values: [],
 			unique: false,
-			repeat: true
+			repeat: true,
+			maxSuggestions: 10
 		};
 
 	function Plugin(element, options) {
@@ -166,7 +167,8 @@
 							e.val.toLowerCase().indexOf(val.toLowerCase()) >= 0 ||
 							(e.meta || "").toLowerCase().indexOf(val.toLowerCase()) >= 0;
 		}, this));
-
+		
+		vals = vals.length > this.options.maxSuggestions ? vals.slice(0, this.options.maxSuggestions) : vals;
 		if(vals.length) {
 			this.renderElements(vals);
 			this.$itemList.show();
